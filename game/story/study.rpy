@@ -412,6 +412,7 @@ label study:
     $ use_click(False)
 
     # 얼굴을 좀 바꿀 필요가 있음
+    $ change_image('panic_1')
 
     #사각사각... 북북... 암튼 정신사나운 소리 5초정도
     play sound "audio/sound/슥슥부욱.mp3"
@@ -640,24 +641,26 @@ label study:
                     "레코드 판들을 뒤적이던 [lamb]가 이내 고개를 기울이며 하나를 집어올렸다."
                     T "이건가? 일단 트, 틀어볼게."
 
-                    stop music
-
-                    # 달칵지이잉
-                    play sound "audio/sound/달칵_지이잉.mp3"
-
-                    ## 확인필요
-
                     window hide # 대사창을 닫음!!
                     # 마우스 좌클릭 불허 설정
                     $ use_click(False)
 
+                    stop music
+
+                    # 달칵지이잉
+                    play sound "audio/sound/달칵_지이잉.mp3"
+                    pause(5)
+
+                    ## 확인필요
+
                     # 와장창ㅋ쿵탕암튼뭔가이상한소리
                     play sound "audio/sound/개시끄러움.wav" volume 0.75
+                    pause(5)
 
                     # 탁
                     play sound "audio/sound/달칵.mp3"
                     # 2초를 기다림!!
-                    pause(2)    
+                    pause(0.1)    
                     # 0.1초뒤에 마우스 좌클릭 허용 설정
                     $ threading.Timer(0.1, use_click, [True]).start()
 
@@ -665,6 +668,7 @@ label study:
                     "... ..."
                     T "... 그, 이, 이게 아닌가 봐. 잘못 골랐네. 이런, 이런 게 왜 여기 있지. 미안 그, 그냥 평범한 거 틀자."
                     # 달칵
+                    play sound "audio/sound/달칵.mp3"
                     play music "audio/bgm/happy-good-morning.mp3" loop fadein 0.1 fadeout 0.2 volume 0.75
                     "아까보단 훨씬 평온한 곡이 들려온다... ..."
                     $ change_image('smail_5')

@@ -254,6 +254,8 @@ screen tinBtn2:
 
 label start:
 
+    # jump hidden_event
+
     # 경고문
     call warning_label from _call_warning_label
 

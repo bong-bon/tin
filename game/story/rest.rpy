@@ -1122,6 +1122,9 @@ label rest:
     hide eye_right
     scene restBg1 with dissolve
 
+    # 기본 브금(어울리는 걸로 고치기)
+    play music "audio/bgm/room.mp3" loop fadein 0.1 fadeout 0.2 volume 0.75
+
     # 저벅저벅소리
     play sound "audio/sound/저벅저벅.mp3"
 

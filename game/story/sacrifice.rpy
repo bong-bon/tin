@@ -710,9 +710,9 @@ label sacrifice:
     $ change_image('smail_1')
     T "그러고 보니 전에, 어른들이 가면을 벗은 모습을 봤어. 이상한, 검은 풀을 키우고 있었어."
     T "우연이긴 하지만 무, 뭔가, 비밀스럽고... 들키면 혼날까 봐, 무서웠어. 조금 두근거렸던가... 아니, 아니야."
-    T "나중에 [you]에게도 알, 알려줄게.{nw}"
+    T "나중에 [you]에게도 알, 알려줄게."
     $ change_image('base_5')
-    extend " 아, 어른들에게 이르면 안, 돼...!"
+    T " 아, 어른들에게 이르면 안, 돼...!"
 
     menu:
         "가 볼까.":
@@ -748,12 +748,12 @@ label sacrifice:
                     hide hide_image
                     scene sacBg6 with dissolve
 
-                    $ change_image('base_2')
                     "저벅저벅"
                     "...... ......"
 
                     menu:
                         "몸은 괜찮아?":
+                            $ change_image('base_2')
                             $ belief += 3
                             T "으, 응...? 음, 아, 괜찮, 괜찮아..."
                             T "[you]... 걱정해주는, 거야...?"
@@ -801,6 +801,7 @@ label sacrifice:
                     hide base_2
                     with dissolve
 
+                    $ change_image('base_2')
                     "곧 갈림길에 다다랐다."
                     "[lamb]는 좀 더 {과와}[you]{/과와} 함께하고 싶어하는 눈치였지만... 이제 헤어져야 할 시간이다."
                     "작별의 인사소리가 들린다. {은는}[you]{/은는} 외면했을까, 마주해 손을 흔들어 주었을까."
@@ -808,7 +809,8 @@ label sacrifice:
                     "어른 또한 {을를}[you]{/을를} 눈치챘다. 동시에 무시했다."
                     
                     play sound "audio/sound/끼이익_열리고_닫히는.mp3"
-
+                    hide base_2
+                    with dissolve
                     "둘은 곧 방에 들어갔다. 여기에 {이가}[you]{/이가} 참견할 권한은 없다."
                     "하지만... 지금은 인적이 드문 시간이고 조용하니 몰래 엿들을 기회는 있을지도 모른다."
 

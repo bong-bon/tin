@@ -1,8 +1,21 @@
 # 히든틴
-screen tinBtn3:
+screen hidden_0:
     imagebutton:
-        idle "images/characters/room/tin_hidden_hover.png"
-        hover "images/characters/room/tin_hidden_idle.png"
+        idle "images/characters/room/tin_hidden_1.png"
+        # hover "images/characters/room/tin_hidden_idle.png"
+        # action [Hide("hidden_0"), Jump("loop_room")]
+        focus_mask True
+        # hovered [ Play("sound", "audio/sound/tv-static.mp3") ]
+        # unhovered [ Play("sound", "<from 1>audio/sound/침묵.mp3") ]
+        xpos 419
+        yanchor 0.098
+        at transform:
+            zoom 0.49
+
+screen hidden_1:
+    imagebutton:
+        idle "images/characters/room/tin_hidden_1.png"
+        # hover "images/characters/room/tin_hidden_idle.png"
         action Jump("loop_click")
         focus_mask True
         # hovered [ Play("sound", "audio/sound/tv-static.mp3") ]
@@ -12,6 +25,33 @@ screen tinBtn3:
         at transform:
             zoom 0.49
 
+screen hidden_2:
+    imagebutton:
+        idle "images/characters/room/tin_hidden_2.png"
+        # hover "images/characters/room/tin_hidden_idle.png"
+        action Jump("loop_click")
+        focus_mask True
+        # hovered [ Play("sound", "audio/sound/tv-static.mp3") ]
+        # unhovered [ Play("sound", "<from 1>audio/sound/침묵.mp3") ]
+        xpos 419
+        yanchor 0.098
+        at transform:
+            zoom 0.49
+
+screen hidden_3:
+    imagebutton:
+        idle "images/characters/room/tin_hidden_3.png"
+        # hover "images/characters/room/tin_hidden_idle.png"
+        action Jump("loop_click")
+        focus_mask True
+        # hovered [ Play("sound", "audio/sound/tv-static.mp3") ]
+        # unhovered [ Play("sound", "<from 1>audio/sound/침묵.mp3") ]
+        xpos 419
+        yanchor 0.098
+        at transform:
+            zoom 0.49
+
+
 screen hidden_days_text:                    # 얘네 둘이 같이 해야함
     imagebutton:
         idle "images/backgrounds/1.png" xpos 60 ypos 60 yanchor 0.57 xanchor 0.26 action Jump("hidden_days_click")
@@ -20,7 +60,7 @@ screen hidden_days_text:                    # 얘네 둘이 같이 해야함
 label hidden_days_click:
     scene black
     hide screen days_text
-    hide screen tinBtn3
+    hide screen hidden_1
     hide screen hidden_days_text
     hide screen end_btn
     with dissolve
@@ -58,22 +98,9 @@ screen end_btn():
         xalign 0.98
         yalign 0.94
         background None
-        textbutton "끝내기":
-            action Jump("loop_close")
+        textbutton "떠나기":
+            action [Hide("end_btn"), Jump("loop_close")]
             style "end_button_style"
-
-# screen end_btn():
-#     vbox:
-#         textbutton "끝내기" action Jump("loop_close")
-
-    # frame:
-    #     xalign 1.0
-    #     yalign 1.0
-    #     xsize 100
-    #     ysize 50
-    #     textbutton _("끝내기"):
-    #         action Jump("loop_close")
-    #         xalign .5
 
 # 히든
 label hidden_event:
@@ -85,6 +112,7 @@ label hidden_event:
     with dissolve
     play music "audio/bgm/뭔가불길함_김.mp3" loop
 
+    show screen hidden_0 with dissolve
     pause
 
     $ dj1 = 0
@@ -95,34 +123,6 @@ label hidden_event:
 
     # 스토리 카운터 초기화
     $ story_count = 0
-    $ stories_per_group = 3
-
-    # 스토리 리스트를 3등분
-    $ story_groups = []
-    $ group_size = len(loop_list) // 3
-    $ remainder = len(loop_list) % 3
-    
-    $ start_idx = 0
-    $ end_idx = 0
-    
-    # 첫 번째 그룹
-    $ end_idx = start_idx + group_size + (1 if remainder > 0 else 0)
-    $ story_groups.append(loop_list[start_idx:end_idx])
-    $ start_idx = end_idx
-    $ remainder -= 1
-    
-    # 두 번째 그룹
-    $ end_idx = start_idx + group_size + (1 if remainder > 0 else 0)
-    $ story_groups.append(loop_list[start_idx:end_idx])
-    $ start_idx = end_idx
-    $ remainder -= 1
-    
-    # 세 번째 그룹
-    $ end_idx = start_idx + group_size + (1 if remainder > 0 else 0)
-    $ story_groups.append(loop_list[start_idx:end_idx])
-
-    $ current_group = 0
-    $ current_story_in_group = 0
 
     T "... 아, 안녕."
     T "미안, 오, 오늘은, 안 될 것, 같... 아."
@@ -163,7 +163,19 @@ label loop_room:
     show screen hidden_days_text
     scene background1 
     with dissolve
-    call screen tinBtn3 with dissolve
+
+    if story_count < 3 :
+        hide screen hidden_0
+        call screen hidden_1
+    elif story_count < 6 :
+        hide screen hidden_1
+        call screen hidden_2
+    elif story_count < 8 :
+        hide screen hidden_2
+        call screen hidden_3
+    else:
+        hide screen hidden_3
+        # show 아뭔가편집이필요해 히든1로
     pause
     # 틴을 클릭하면 loop_click 이벤트로 넘어간다
 
@@ -227,11 +239,8 @@ label hidden_story_1:
     T "... 진리가, 중요할까."
     T "결국 내가 아직도, 두려움에서 벗어, 나지 못하는 게... 나한텐 더 주, 중요해."
 
-    # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 label hidden_story_2:
     scene black
@@ -288,11 +297,8 @@ label hidden_story_2:
     $ change_image('mu_9')
     T "... 나 무서워 [you]... ..."
 
-    # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 label hidden_story_3:
     scene black
@@ -340,11 +346,8 @@ label hidden_story_3:
         $ change_image('smail_1')
         T "답은 드, 들려주지 않아도, 돼. 고마워."
 
-        # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 label hidden_story_4:
     scene black
@@ -372,12 +375,8 @@ label hidden_story_4:
     $ change_image('smail_1')
     T "... 그러면 정말, 행복하겠다."
 
-        # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
-
+    
+    jump loop_room
 
 label hidden_story_5:
     scene black
@@ -421,11 +420,8 @@ label hidden_story_5:
 
     T "앞으로는 빗질, 이라도 제대로... 하려고 노력, 노력할게..."
 
-    # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 
 label hidden_story_6:
@@ -507,11 +503,8 @@ label hidden_story_6:
     # 뭔가 더 써야할듯
 
 
-    # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 label hidden_story_7:
     scene black
@@ -630,11 +623,8 @@ label hidden_story_7:
     T "... 언제쯤 모, 모든 일이 끝날까?"
     T "이대로 영원히 기적이, 오지 않으면. 죽어서야, 끝나는 걸까?"
 
-    # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 label hidden_story_8:
     scene black
@@ -764,11 +754,8 @@ label hidden_story_8:
 
     T "열심히, 할 테니까..."
 
-    # 3개 스토리마다 룸으로 돌아가기
-    if story_count % stories_per_group == 0:
-        jump loop_room
-    else:
-        jump loop_click
+    
+    jump loop_room
 
 # 더는 루프를 돌지 않으면
 label loop_close:

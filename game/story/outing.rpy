@@ -399,7 +399,7 @@ label outing:
             T "어... 잘 모르, 겠는데... "
             T "아... 알았어... 참아볼게..."
 
-        "그러던가.":
+        "그러든가.":
             $ belief += 1
             $ change_image('smail_3')
             "허락을 받은 [lamb]가 기쁜 얼굴로 가판대를 향해 달려갔다."
@@ -752,6 +752,7 @@ label outing:
     $ threading.Timer(0.1, use_click, [True]).start()
     
     # 확인 필요
+    # 들썩이고싶다
     $ change_image('boom_1')
     T "흐아악...!"
     $ change_image('panic_6')
