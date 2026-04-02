@@ -1,3 +1,16 @@
+# Ren'Py / runtime-generated files
+log.txt
 *.txt
 *.rpyb
-saves
+*.rpyc
+*.pyc
+
+# Ren'Py cache & saves (generated at runtime)
+game/cache/
+game/saves/
+
+# Common editor/OS junk
+*.bak
+*~
+.DS_Store
+Thumbs.db
