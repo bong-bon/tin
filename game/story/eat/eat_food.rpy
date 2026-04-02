@@ -471,4 +471,5 @@ label eat_food:
                 call not_eat1 from _call_not_eat1
             else:
                 call not_eat2 from _call_not_eat2
-                
+    
+    return

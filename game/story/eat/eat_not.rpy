@@ -38,6 +38,8 @@ label not_eat1:
             $ day += 1
             jump room
 
+    return
+
 
 label not_eat2:
     $ belief -= 5

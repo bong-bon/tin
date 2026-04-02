@@ -1,4 +1,4 @@
-﻿## 이 파일은 귀하의 게임 커스텀으로 변경될 수 있는 옵션을 포함합니다.
+## 이 파일은 귀하의 게임 커스텀으로 변경될 수 있는 옵션을 포함합니다.
 ##
 ## 두 개의 '#' 표시로 시작되는 줄은 주석이며, 그것을 없애지 말아야 합니다. 한 개
 ## 의 '#' 표시로 시작되는 줄은 주석 처리된 코드로 필요한 경우 제거해도 됩니다.
@@ -50,6 +50,9 @@ define build.name = "Tinde"
 define config.has_sound = True
 define config.has_music = True
 define config.has_voice = True
+
+# 배경음 전환 시 기존 곡을 부드럽게 줄이며 교체합니다. (sound 채널에는 영향 없음)
+define config.fade_music = 1.5
 
 
 ## 사용자가 음향 또는 음성 채널에서 테스트 사운드를 재생할 수 있게 하려면 아래
